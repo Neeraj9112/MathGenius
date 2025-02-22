@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Solver | MathGenius AI</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.6.4/math.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tesseract.js/2.1.0/tesseract.min.js"></script>
+    <script src="https://unpkg.com/mathlive/dist/mathlive.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        header {
+            background-color: #007bff;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.45rem;
+        }
+        .logo {
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+            padding: 0;
+            margin: 0;
+        }
+        nav ul li {
+            margin: 0 15px;
+        }
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+        }
+        .container {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h2 {
+            color: #007bff;
+        }
+        button {
+            margin-top: 10px;
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        footer {
+            text-align: center;
+            padding: 1.7rem;
+            background-color: #007bff;
+            color: white;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .math-keyboard {
+            margin-top: 15px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            padding: 5px;
+        }
+        .math-keyboard button {
+            width: auto;
+            flex: 0 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MathGenius</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about-us.html">About Us</a></li>
+                <li><a href="formulas.html">Formulas</a></li>
+                <li><a href="tutorials.html">Tutorials</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div class="container">
+        <h2>Math Solver</h2>
+        <math-field id="math-input" style="width: 100%; padding: 10px; font-size: 18px; border: 1px solid #ccc; border-radius: 5px;"></math-field>
+        
+        <div class="math-keyboard">
+            <button onclick="insertSymbol('+')">+</button>
+            <button onclick="insertSymbol('-')">-</button>
+            <button onclick="insertSymbol('*')">×</button>
+            <button onclick="insertSymbol('/')">÷</button>
+            <button onclick="insertSymbol('^')">^</button>
+            <button onclick="insertSymbol('sqrt()')">√</button>
+            <button onclick="insertSymbol('pi')">π</button>
+            <button onclick="insertSymbol('sin()')">sin</button>
+            <button onclick="insertSymbol('cos()')">cos</button>
+            <button onclick="insertSymbol('tan()')">tan</button>
+            <button onclick="insertSymbol('[')">[</button>
+            <button onclick="insertSymbol(']')">]</button>
+            <button onclick="insertSymbol('det()')">det</button>
+            <button onclick="insertSymbol('inv()')">inv</button>
+            <button onclick="insertSymbol('transpose()')">transpose</button>
+            <button onclick="insertSymbol('log()')">log</button>
+            <button onclick="insertSymbol('ln()')">ln</button>
+            <button onclick="insertSymbol('abs()')">abs</button>
+            <button onclick="insertSymbol('factorial()')">!</button>
+            <button onclick="insertSymbol('integral()')">∫</button>
+            <button onclick="insertSymbol('derivative()')">d/dx</button>
+        </div>
+        
+        <input type="file" id="fileInput" accept="image/*">
+        <button onclick="scanImage()">Scan</button>
+        <button onclick="solveMath()">Solve</button>
+        
+        <p id="result"></p>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 MathGenius AI. All rights reserved.</p>
+    </footer>
+    
+    <script>
+        function solveMath() {
+            let expression = document.getElementById("math-input").value;
+            try {
+                // Check for unsupported operations
+                if (expression.includes("integral") || expression.includes("derivative")) {
+                    throw new Error("Symbolic operations (integral/derivative) are not supported yet.");
+                }
+
+                // Parse and evaluate the expression using Math.js
+                let result = math.evaluate(expression);
+                document.getElementById("result").innerText = `Result: ${result}`;
+            } catch (error) {
+                document.getElementById("result").innerText = `Error: ${error.message}`;
+            }
+        }
+        
+        function scanImage() {
+            let file = document.getElementById("fileInput").files[0];
+            if (!file) {
+                alert("Please select an image file.");
+                return;
+            }
+            
+            let reader = new FileReader();
+            reader.onload = function () {
+                Tesseract.recognize(reader.result, 'eng')
+                    .then(({ data: { text } }) => {
+                        document.getElementById("math-input").value = text;
+                        solveMath();
+                    })
+                    .catch(error => alert("Error processing image: " + error));
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        function insertSymbol(symbol) {
+            document.getElementById("math-input").focus();
+            document.getElementById("math-input").insert(symbol);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Help & FAQs - MathGenius AI</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f9; color: #333; transition: background-color 0.3s ease, color 0.3s ease;">
+
+    <!-- Header (Same as Other Pages) -->
+    <header style="background: #4e73df; color: white; padding: 20px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10;">
+        <div class="logo" style="display: flex; align-items: center;">
+            <h1 style="font-size: 24px; margin: 0;">MathGenius AI</h1>
+        </div>
+        <nav>
+            <ul style="display: flex; list-style: none; margin: 0; padding: 0;">
+                <li style="margin-right: 20px;"><a href="index.html" style="color: white; text-decoration: none; font-size: 18px;">Home</a></li>
+                <li style="margin-right: 20px;"><a href="about.html" style="color: white; text-decoration: none; font-size: 18px;">About Us</a></li>
+                <li style="margin-right: 20px;"><a href="formulas.html" style="color: white; text-decoration: none; font-size: 18px;">Formulas</a></li>
+                <li style="margin-right: 20px;"><a href="tutorials.html" style="color: white; text-decoration: none; font-size: 18px;">Tutorials</a></li>
+                <li style="margin-right: 20px;"><a href="contact.html" style="color: white; text-decoration: none; font-size: 18px;">Contact</a></li>
+                <li style="margin-right: 20px;"><a href="help.html" style="color: white; text-decoration: none; font-size: 18px;">Help</a></li>
+                <li style="margin-right: 20px;"><a href="login.html" style="background: #007bff; padding: 10px 20px; border-radius: 4px; text-decoration: none; color: white;">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Help Section -->
+    <section style="padding: 50px; text-align: center; background: white; animation: fadeIn 1.5s;">
+        <h2 style="color: #4e73df; font-size: 36px;">Help & FAQs</h2>
+        <p style="color: #333; font-size: 18px; max-width: 700px; margin: auto;">
+            Need assistance? Find answers to common questions or contact our support team.
+        </p>
+    </section>
+
+    <!-- FAQs Section -->
+    <section style="background: #e9ecef; padding: 50px; text-align: center; animation: fadeIn 2s;">
+        <h2 style="color: #4e73df; font-size: 32px;">Frequently Asked Questions</h2>
+        <div style="max-width: 700px; margin: auto; text-align: left;">
+            <button class="faq-btn">How does MathGenius AI work?</button>
+            <div class="faq-content">MathGenius AI uses AI-powered algorithms to solve math problems step-by-step.</div>
+
+            <button class="faq-btn">Is MathGenius AI free?</button>
+            <div class="faq-content">Yes! MathGenius AI offers free basic services, with premium features available.</div>
+
+            <button class="faq-btn">Can I save my solutions?</button>
+            <div class="faq-content">Yes! You can save and export solutions as PDFs or images.</div>
+
+            <button class="faq-btn">How do I contact support?</button>
+            <div class="faq-content">You can contact us via email at <a href="mailto:support@mathgeniusai.com" style="color: #4e73df;">support@mathgeniusai.com</a>.</div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer style="background: #343a40; color: white; padding: 20px; text-align: center;">
+        <p>&copy; 2025 MathGenius AI. All rights reserved.</p>
+        <ul style="list-style: none; padding: 0; margin: 10px 0;">
+            <li style="display: inline-block; margin-right: 15px;"><a href="privacy.html" style="color: #f8f9fa; text-decoration: none;">Privacy Policy</a></li>
+            <li style="display: inline-block; margin-right: 15px;"><a href="termsofservice.html" style="color: #f8f9fa; text-decoration: none;">Terms of Service</a></li>
+            <li style="display: inline-block;"><a href="forum.html" style="color: #f8f9fa; text-decoration: none;">Community Forum</a></li>
+        </ul>
+    </footer>
+
+    <!-- Animations & FAQ Script -->
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .faq-btn {
+            background: #4e73df;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            text-align: left;
+            transition: background 0.3s ease;
+        }
+        .faq-btn:hover { background: #3b5cc4; }
+        .faq-content {
+            display: none;
+            padding: 10px;
+            border-left: 3px solid #4e73df;
+            background: white;
+            margin-bottom: 10px;
+        }
+    </style>
+
+    <script>
+        // FAQ Toggle
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelectorAll('.faq-btn').forEach(button => {
+                button.addEventListener('click', function () {
+                    let content = this.nextElementSibling;
+                    if (content.style.display === "block") {
+                        content.style.display = "none";
+                    } else {
+                        // Hide other FAQ answers before showing the selected one (optional)
+                        document.querySelectorAll('.faq-content').forEach(item => {
+                            item.style.display = "none";
+                        });
+                        content.style.display = "block";
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

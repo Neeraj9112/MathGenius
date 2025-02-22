@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Registration</title>
+    <style>
+        /* General Styling */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(to right, #007bff, #007bff);
+            flex-direction: column;
+            animation: fadeIn 1s ease-in;
+            margin: 0;
+        }
+
+        /* Form Container */
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            width: 320px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.02);
+        }
+
+        h2 {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        /* Input Fields */
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            box-shadow: 0px 0px 8px rgba(233, 30, 99, 0.5);
+        }
+
+        /* Buttons */
+        button {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(to right, #007bff, #007bff);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 10px;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0px 4px 8px rgba(233, 30, 99, 0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(to right, #007bff,#007bff);
+            transform: scale(1.05);
+        }
+
+        /* Toggle Link */
+        .toggle {
+            margin-top: 12px;
+            color: #007bff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .toggle:hover {
+            color: #007bff;
+        }
+
+        /* Home Button */
+        .home-button {
+            margin-top: 20px;
+            background: linear-gradient(to right, #007bff, #007bff);
+            width: auto;
+            padding: 10px 20px;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 480px) {
+            .container {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+            <div class="container">
+                <h2 id="form-title">Login</h2>
+                
+        
+                <!-- Login Form -->
+                <form id="login-form" action="login.php" method="POST">
+                    <input type="text" id="login-username" name="username" placeholder="Username or Email" required>
+                    <input type="password" id="login-password" name="password" placeholder="Password" required>
+                    <button type="submit" name="login">Login</button>
+                </form>
+                
+         
+                <div>
+                    <a href="register.html">Don't have an account?</a>
+            
+            </div>
+        
+        
+       
+    <!-- Home Button -->
+    <button class="home-button" onclick="window.location.href='index.html'">Home</button>
+
+    <script>
+        function toggleForm() {
+            let loginForm = document.getElementById("login-form");
+            let registerForm = document.getElementById("register-form");
+            let formTitle = document.getElementById("form-title");
+            let toggleText = document.querySelector(".toggle");
+
+            // Smoothly fade out current form
+            loginForm.style.opacity = registerForm.style.opacity = 0;
+
+            setTimeout(() => {
+                if (loginForm.style.display === "none") {
+                    loginForm.style.display = "block";
+                    registerForm.style.display = "none";
+                    formTitle.innerText = "Login";
+                    toggleText.innerText = "Don't have an account? Register";
+                } else {
+                    loginForm.style.display = "none";
+                    registerForm.style.display = "block";
+                    formTitle.innerText = "Register";
+                    toggleText.innerText = "Already have an account? Login";
+                }
+
+                // Fade in the new form
+                loginForm.style.opacity = registerForm.style.opacity = 1;
+            }, 200);
+        }
+    </script>
+
+</body>
+</html>
